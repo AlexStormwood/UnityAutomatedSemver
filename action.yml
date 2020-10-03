@@ -10,4 +10,4 @@ outputs:
     description: 'The new semver number of this Unity project.'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'src/index.js'
