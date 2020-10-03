@@ -1,5 +1,5 @@
 name: 'Unity Automated Semver'
-description: 'Find and increment the project semver based on relevant commit tags.'
+description: 'Find and increment the Unity project version number per semver rules.'
 branding:
   icon: settings
   color: blue
