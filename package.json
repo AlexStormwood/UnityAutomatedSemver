@@ -1,0 +1,21 @@
+{
+  "name": "unityautomatedsemver",
+  "version": "1.0.0",
+  "description": "Github Action to increment relevant version numbers in a project based on Github repository commits.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "unity",
+    "semver"
+  ],
+  "author": "AlexHolderDev",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "find": "^0.3.0",
+    "js-yaml": "^3.14.0"
+  }
+}

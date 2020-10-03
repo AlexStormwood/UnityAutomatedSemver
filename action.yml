@@ -1,0 +1,13 @@
+name: 'Unity Automated Semver'
+description: 'Find and increment the project semver based on relevant commit tags.'
+inputs:
+  semver-update-type:  # id of input
+    description: 'Which number to increment based on semver rules.'
+    required: true
+    default: 'patch'
+outputs:
+  semver-number: # id of output
+    description: 'The new semver number of this Unity project.'
+runs:
+  using: 'node12'
+  main: 'index.js'
