@@ -1,7 +1,8 @@
 name: 'Unity Automated Semver'
 description: 'Find and increment the project semver based on relevant commit tags.'
-icon: settings
-color: blue
+branding:
+  icon: settings
+  color: blue
 inputs:
   semver-update-type:  # id of input
     description: 'Which number to increment based on semver rules.'
