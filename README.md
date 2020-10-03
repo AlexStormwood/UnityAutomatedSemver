@@ -63,3 +63,9 @@ jobs:
           commit_message: "Updated semver via automated action."
           commit_options: '--no-verify --signoff'
 ```
+
+## To-Do List
+
+* General code optimizations
+* Double-check & implement support for non-standard Unity target platforms (in case not all target platforms respect the bundleVersion property)
+* Create more example workflows
