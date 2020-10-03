@@ -27,7 +27,9 @@ This represents the semantic version string _after_ this action has been perform
 
 ## Example Usage
 
-In your repository containing a Unity project, you should have a Github Actions workflow file set up in your `.github/workflows` directory. Name it whatever you want. The example code below updates the patch number in every commit made to the repository.
+In your repository containing a Unity project, you should have a Github Actions workflow file set up in your `.github/workflows` directory. Name it whatever you want (as long as it ends in ".yml"!). After letting this action run, you then have to sort out committing & pushing the changed file(s) to your repo from within the workflow. The example code below shows all of this; it updates the patch number in every push made to the repository. 
+
+Currently, the big downside to this process is that all developers working on the repo must then fetch & pull the changes made by this action. No one should be editing the `ProjectSettings.asset` file anyway so this shouldn't cause any merge or pull/push issues, but still worth noting.
 
 ```yaml
 name: Update Unity project semantic versioning
