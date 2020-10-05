@@ -62,10 +62,13 @@ async function modifyUnityProjSemVer() {
                     case "minor":
                         console.log("we did a minor tag commit!");
                         semverAsObj.minor++;
+                        semverAsObj.patch = 0;
                         break;
                     case "major":
                         console.log("MAJOR patch omg!");
                         semverAsObj.major++;
+                        semverAsObj.minor = 0;
+                        semverAsObj.patch = 0;
                         break;
                     default:
                         break;
