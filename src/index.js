@@ -27,7 +27,7 @@ async function modifyUnityProjSemVer() {
     let projectSettingsFilePath = "";
     if(core.getInput("project-settings-path")){
         console.log("project-settings-path input detected...")
-        projectSettingsFilePath = process.env.GITHUB_WORKSPACE + core.getInput("project-settings-path");
+        projectSettingsFilePath = process.env.GITHUB_WORKSPACE + "/" + core.getInput("project-settings-path");
     }else{
         console.log("ProjectSettingsPath input NOT detected...attempting to automatically find ProjectSettings/ProjectSettings.asset")
         projectSettingsFilePath = findProjectSettingsPath();
