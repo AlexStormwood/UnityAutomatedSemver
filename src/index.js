@@ -71,6 +71,7 @@ async function modifyUnityProjSemVer() {
                         semverAsObj.patch = 0;
                         break;
                     default:
+                        core.setFailed("major, minor or patch must be specified as semver-update-type.");
                         break;
                 }
 
