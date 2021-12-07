@@ -9,16 +9,9 @@ const find = require('find');
  * @returns string the path to the unity ProjectSettings/ProjectSettings.asset file ... hopefully
  */
 function findProjectSettingsPath(){
-    let foundFileNames = [];
-    find.file(/\b(ProjectSettings.asset)\b/, process.env.GITHUB_WORKSPACE, (files) => {
-        foundFileNames = files;
-        console.log(`We found these relevant files: \n ${foundFileNames}`);
-        return foundFileNames[0];
-    }).error(error => {
-        console.log("Something went wrong finding the file. Please try something else.")
-        console.log("find.file error message is: \n" + error);
-    })
-    return "";
+    let foundFileNames = find.fileSync(/\b(ProjectSettings.asset)\b/, process.env.GITHUB_WORKSPACE);
+    console.log(`We found these relevant files: \n ${foundFileNames}`);
+    return foundFileNames[0];
 }
 
 async function modifyUnityProjSemVer() {
