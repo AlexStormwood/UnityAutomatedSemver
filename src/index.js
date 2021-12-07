@@ -87,8 +87,9 @@ async function modifyUnityProjSemVer() {
             console.log(`Semver is now: ${JSON.stringify(semverAsObj)}`);
 
             // 8. Convert semver obj back into string
-            let newSemverAsString = `bundleVersion: ${semverAsObj.major}.${semverAsObj.minor}.${semverAsObj.patch}`;
-            core.setOutput("semver-number", newSemverAsString)
+            let newSemver = `${semverAsObj.major}.${semverAsObj.minor}.${semverAsObj.patch}`;
+            core.setOutput("semver-number", newSemver);
+            let newSemverAsString = `bundleVersion: ` + newSemver;
 
             // 9. Insert string back into ProjectSettings.asset file
             fs.readFile(projectSettingsFilePath, "utf8", (error, data) => {
