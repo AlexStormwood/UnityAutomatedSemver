@@ -15,6 +15,10 @@ When calling this action, you can specify the type of semver update you'd like t
 * minor - This increments the second number in a "major.minor.patch" version string
 * patch - This increments the third number in a "major.minor.patch" version string
 
+### project-settings-path (optional)
+
+The path to the ProjectSettings/ProjectSettings.asset file for your unity project. If not specified will attempt to automatically find it.
+
 ## Outputs 
 
 This is the data that you can use after this action has completed, in other actions & scripts.

@@ -8,6 +8,9 @@ inputs:
     description: 'Which number to increment based on semver rules.'
     required: true
     default: 'patch'
+  project-settings-path: # example ProjectSettings/ProjectSettings.asset
+    description: 'Path to the ProjectSettings.asset file'
+    required: false
 outputs:
   semver-number: # id of output
     description: 'The new semver number of this Unity project.'
