@@ -15,6 +15,10 @@ When calling this action, you can specify the type of semver update you'd like t
 * minor - This increments the second number in a "major.minor.patch" version string
 * patch - This increments the third number in a "major.minor.patch" version string
 
+### project-settings-path (optional)
+
+The path to the ProjectSettings/ProjectSettings.asset file for your unity project. If not specified will action will attempt to automatically find it.
+
 ## Outputs 
 
 This is the data that you can use after this action has completed, in other actions & scripts.
@@ -51,7 +55,8 @@ jobs:
         id: semver-update
         with:
           semver-update-type: 'patch' # Change this string to any suitable string mentioned in the Inputs section of this action's readme to suit your needs.
-      
+          project-settings-path: 'ProjectSettings/ProjectSettings.asset' # optional: specify the exact location of the ProjectSettings file, otherwise action will attempt to automatically find it.
+
       # Validate that the number has been incremented correctly.
       - name: Get the new semver number
         run: echo "The new semver number for this Unity project is ${{ steps.semver-update.outputs.semver-number }}"
