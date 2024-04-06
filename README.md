@@ -19,6 +19,24 @@ When calling this action, you can specify the type of semver update you'd like t
 
 The path to the ProjectSettings/ProjectSettings.asset file for your unity project. If not specified will action will attempt to automatically find it.
 
+### should-add-ms-store-trailing-zero (optional)
+
+If you're working with a platform that requires an extra trailing ".0" on a semver string, such as the Microsoft Store, you can set this to `"true"` (a string of the word "true") and your semver output will gain a 4th number.
+
+So if this is set to false:
+
+```
+major.minor.patch
+0.0.0
+```
+
+If this is set to true:
+
+```
+major.minor.patch.trailingZero
+0.0.0.0
+```
+
 ## Outputs 
 
 This is the data that you can use after this action has completed, in other actions & scripts.
@@ -51,7 +69,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Find ProjectSettings.asset & increment its bundleVersion number
-        uses: AlexHolderDeveloper/UnityAutomatedSemver@v1.0.0 # Change v1.0.0 to whatever tag is newer in the AlexHolderDeveloper/UnityAutomatedSemver repository.
+        uses: AlexStormwood/UnityAutomatedSemver@v1.1.1 # Change v1.1.1 to whatever tag is newer in the AlexStormwood/UnityAutomatedSemver repository.
         id: semver-update
         with:
           semver-update-type: 'patch' # Change this string to any suitable string mentioned in the Inputs section of this action's readme to suit your needs.

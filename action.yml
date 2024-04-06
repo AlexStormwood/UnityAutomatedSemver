@@ -11,9 +11,13 @@ inputs:
   project-settings-path: # example ProjectSettings/ProjectSettings.asset
     description: 'Path to the ProjectSettings.asset file'
     required: false
+  should-add-ms-store-trailing-zero:
+    description: 'Add a trailing ".0" to the semver result, for the sake of the Microsoft Store.'
+    required: false
+    default: 'false'
 outputs:
   semver-number: # id of output
     description: 'The new semver number of this Unity project.'
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'src/index.js'

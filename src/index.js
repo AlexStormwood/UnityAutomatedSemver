@@ -88,6 +88,13 @@ async function modifyUnityProjSemVer() {
 
             // 8. Convert semver obj back into string
             let newSemver = `${semverAsObj.major}.${semverAsObj.minor}.${semverAsObj.patch}`;
+
+            let shouldAddTrailingDotZero = core.getInput("should-add-ms-store-trailing-zero") === "true";
+
+            if (shouldAddTrailingDotZero) {
+                newSemver += ".0";
+            }
+
             core.setOutput("semver-number", newSemver);
             let newSemverAsString = `bundleVersion: ` + newSemver;
 
