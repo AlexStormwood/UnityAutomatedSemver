@@ -69,7 +69,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Find ProjectSettings.asset & increment its bundleVersion number
-        uses: AlexStormwood/UnityAutomatedSemver@v1.1.1 # Change v1.1.1 to whatever tag is newer in the AlexStormwood/UnityAutomatedSemver repository.
+        uses: AlexStormwood/UnityAutomatedSemver@v1.1.0 # Change v1.1.1 to whatever tag is newer in the AlexStormwood/UnityAutomatedSemver repository.
         id: semver-update
         with:
           semver-update-type: 'patch' # Change this string to any suitable string mentioned in the Inputs section of this action's readme to suit your needs.
