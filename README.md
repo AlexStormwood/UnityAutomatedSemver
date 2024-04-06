@@ -66,7 +66,7 @@ jobs:
     steps:
       # You must ALWAYS checkout your repo so that actions in the workflow can use it.
       - name: Checkout 
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Find ProjectSettings.asset & increment its bundleVersion number
         uses: AlexStormwood/UnityAutomatedSemver@v1.1.0 # Change v1.1.1 to whatever tag is newer in the AlexStormwood/UnityAutomatedSemver repository.
@@ -81,7 +81,7 @@ jobs:
 
       # Commit & push the updated semver number back into the repo. Yes, you have to fetch & pull in your local workstation after this step is done.
       - name: Push changed files back to repo
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Updated semver via automated action."
           commit_options: '--no-verify --signoff'
