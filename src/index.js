@@ -104,7 +104,17 @@ async function modifyUnityProjSemVer() {
                     return console.log(`Something went wrong reading the original ProjectSetting.asset! Error message follows: \n${error}`);
                 }
 
-                var result = data.replace(/\b(bundleVersion\: )(([0-9]+).([0-9]+).([0-9]+))\b/, newSemverAsString);
+
+                var result = "";
+
+                if (shouldAddTrailingDotZero){
+                    result = data.replace(/\b(bundleVersion\: )(([0-9]+).([0-9]+).([0-9]+).([0-9]+))\b/, newSemverAsString);
+
+                } else {
+                    result = data.replace(/\b(bundleVersion\: )(([0-9]+).([0-9]+).([0-9]+))\b/, newSemverAsString);
+
+                }
+
                 fs.writeFile(projectSettingsFilePath, result, 'utf8', (error) => {
                     if (error){
                         return console.log(`Something went wrong inserting the new semver into the original ProjectSetting.asset! Error message follows: \n${error}`);
