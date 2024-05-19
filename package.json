@@ -1,6 +1,6 @@
 {
   "name": "unityautomatedsemver",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Github Action to increment relevant version numbers in a project based on Github repository commits.",
   "main": "index.js",
   "scripts": {
