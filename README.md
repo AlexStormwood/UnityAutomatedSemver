@@ -87,6 +87,22 @@ jobs:
           commit_options: '--no-verify --signoff'
 ```
 
+
+### For Large Projects
+
+If your project takes a long time to checkout in git, you may benefit from doing a sparse checkout when running this action. We don't need your entire Unity project to be checked out into the action runner's workspace, we just need the `ProjectSettings.asset` file to be somewhere in the action runner's workspace.
+
+For example, if the ProjectSettings folder is in the root of the repo, then this variation of the checkout step will checkout just that folder. Since it includes the `ProjectSettings.asset` file within that folder, and no paths are changed by a sparse checkout, the rest of a workflow using this action can remain unchanged.
+
+```yaml
+ - name: Checkout 
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: ProjectSettings
+```
+
+As long as the `ProjectSettings.asset` file exists somewhere in the action runner's workspace, this action will find it and be able to update it.
+
 ## To-Do List
 
 * General code optimizations
