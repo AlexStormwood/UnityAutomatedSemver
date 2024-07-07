@@ -2,17 +2,9 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const find = require('find');
+const { findProjectSettingsPath } = require('./utils/autoFindProjectSettings');
 
-/**
- * Find and returns the first path that contains a ProjectSettings.asset file
- * @returns string the path to the unity ProjectSettings/ProjectSettings.asset file ... hopefully
- */
-function findProjectSettingsPath(){
-    let foundFileNames = find.fileSync(/\b(ProjectSettings.asset)\b/, process.env.GITHUB_WORKSPACE);
-    console.log(`We found these relevant files: \n ${foundFileNames}`);
-    return foundFileNames[0];
-}
+
 
 async function modifyUnityProjSemVer() {
     // 1. find ProjectSettings.asset
@@ -22,10 +14,12 @@ async function modifyUnityProjSemVer() {
         console.log("project-settings-path input detected...")
         projectSettingsFilePath = process.env.GITHUB_WORKSPACE + "/" + core.getInput("project-settings-path");
     }else{
-        console.log("ProjectSettingsPath input NOT detected...attempting to automatically find ProjectSettings/ProjectSettings.asset")
-        projectSettingsFilePath = findProjectSettingsPath();
+        console.log("ProjectSettingsPath input NOT detected...attempting to automatically find ProjectSettings/ProjectSettings.asset");
+        projectSettingsFilePath = await findProjectSettingsPath();
+        projectSettingsFilePath = projectSettingsFilePath[0];
     }
-    console.log("Path to ProjectSettings.asset using env.GITHUB_WORKSPACE: ---------\n" + projectSettingsFilePath + "\n---------------")
+    console.log("Path to ProjectSettings.asset using env.GITHUB_WORKSPACE: ---------\n" + projectSettingsFilePath + "\n---------------");
+
     // 2. make a copy of that file
     let copiedFileContents = '';
 
