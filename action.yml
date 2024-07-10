@@ -4,20 +4,92 @@ branding:
   icon: settings
   color: blue
 inputs:
-  semver-update-type:  # id of input
+  updateMode:  
     description: 'Which number to increment based on semver rules.'
-    required: true
+    required: false
     default: 'patch'
-  project-settings-path: # example ProjectSettings/ProjectSettings.asset
+  projectSettingsPath: 
     description: 'Path to the ProjectSettings.asset file'
     required: false
-  should-add-ms-store-trailing-zero:
-    description: 'Add a trailing ".0" to the semver result, for the sake of the Microsoft Store.'
+  backupAssetFile:
+    description: 'Path to the ProjectSettings.asset file'
+    required: false
+    default: 'true'
+  treatBuildAsPatch:
+    description: Assign the 'build' property the same value as the 'patch' property. 
+    required: false
+    default: 'true'
+  treatRevisionAsQuad: 
+    description: Assign the 'revision' property the same value as the 'quad' property. 
+    required: false
+    default: 'true'
+  major: 
+    description: Override the value of the 'major' property of a project. 
+    required: false
+  minor: 
+    description: Override the value of the 'minor' property of a project. 
+    required: false
+  patch: 
+    description: Override the value of the 'patch' property of a project. 
+    required: false
+  quad: 
+    description: Override the value of the 'quad' property of a project. 
+    required: false
+  revision: 
+    description: Override the value of the 'revision' property of a project. 
+    required: false
+  build: 
+    description: Override the value of the 'build' property of a project. 
+    required: false
+  releaseLabel: 
+    description: Override the value of the 'releaseLabel' property of a project. 
+    required: false
+  buildLabel: 
+    description: Override the value of the 'buildLabel' property of a project. 
+    required: false
+  useBundleVersionForAll:
+    description: Use the semver string applied to the 'bundleVersion' property as the string applied to all relevant platform version properties in the project settings file.
     required: false
     default: 'false'
+  bundleVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `bundleVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}.{patch}"
+  switchDisplayVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `switchDisplayVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}.{patch}"
+  ps4MasterVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `ps4MasterVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}"
+  ps4AppVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `ps4AppVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}"
+  psp2MasterVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `psp2MasterVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}"
+  psp2AppVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `psp2AppVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}"
+  metroPackageVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `metroPackageVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}.{patch}.{quad}"
+  XboxOneVersion:
+    description: The semver output format that will be applied to the `ProjectSettings.asset` file's `XboxOneVersion` property, defined in a string.
+    required: false
+    default: "{major}.{minor}.{patch}.{quad}"
 outputs:
-  semver-number: # id of output
+  semver-string: 
     description: 'The new semver number of this Unity project.'
+  semver-number: 
+    description: 'The new semver number of this Unity project.'
+  semver-full-data:
+    description: 'The full semver data used and calculated by this action.'
 runs:
   using: 'node20'
   main: 'src/index.js'
