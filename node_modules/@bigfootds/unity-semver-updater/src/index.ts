@@ -1,4 +1,4 @@
-import { ProjectSettingsHelpers } from "./functions/yamlManipulator";
+import { ProjectSettingsHelpers } from "./functions/ProjectSettingsHelpers";
 import { SemverUpdateType } from "./utils/constants";
 import { PlayerSettingsVersionStrings, BuildNumber } from "./utils/types";
 import { UnityProjectVersion } from "./utils/UnityProjectVersion";

@@ -20,8 +20,7 @@
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "@actions/glob": "^0.4.0",
-    "@bigfootds/unity-semver-updater": "^0.0.3",
-    "yaml": "^2.4.5"
+    "@bigfootds/unity-semver-updater": "^0.0.5"
   },
   "devDependencies": {
     "jest": "^29.7.0"
