@@ -134,7 +134,7 @@ async function app(){
     let valuesToWrite = {
         bundleVersion: foundProjectSettings.toFormattedOutput(actionInputs.bundleVersion),
     };
-    if (actionInputs.useBundleVersionForAll){
+    if (actionInputs.useBundleVersionForAll == "true"){
         valuesToWrite = {
             bundleVersion: valuesToWrite.bundleVersion,
             buildNumber: {
