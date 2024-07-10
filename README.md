@@ -135,7 +135,7 @@ Make a copy of the `ProjectSettings.asset` file, named as `ProjectSettings-BACKU
 
 Useful for keeping a copy of the file if you're still sorting out exactly what version formatting you want to use - just keep in mind that this is not gonna help you if you run this action twice and then check the backup. Run the action, check the backup, copy the backup out to somewhere else, and _then_ run the action again!
 
-### updateMode
+### updateMode (optional)
 
 When calling this action, you can specify the type of semver update you'd like to perform. Suitable values are:
 
@@ -160,7 +160,7 @@ Quads - the fourth number in a semver string - are not part of the semver spec, 
 
 If you want to write a workflow that automatically updates your Unity project's semver based on your conventional commit message history, then you must combine additional steps or actions into your workflow to figure out what type of semver update must be made _before_ running this action.
 
-### treatBuildAsPatch
+### treatBuildAsPatch (optional)
 
 Defaults to true.
 
@@ -174,7 +174,7 @@ Patches are higher priority than builds since patches are in the semver spec and
 
 For 99.9999% of use cases, just leave this as-is.
 
-### treatRevisionAsQuad
+### treatRevisionAsQuad (optional)
 
 Defaults to true.
 
