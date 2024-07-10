@@ -15,35 +15,62 @@ Currently, the big downside to this process is that all developers working on th
 ```yaml
 name: Update Unity project semantic versioning
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
-  create:
-    name: Update semver
-    runs-on: ubuntu-latest
-    
-    steps:
-      # You must ALWAYS checkout your repo so that actions in the workflow can use it.
-      - name: Checkout 
-        uses: actions/checkout@v4
+    create:
+        name: Update semver
+        runs-on: ubuntu-latest
 
-      - name: Find ProjectSettings.asset & increment its bundleVersion number
-        uses: AlexStormwood/UnityAutomatedSemver@v2.0.0 # Change v1.1.1 to whatever tag is newer in the AlexStormwood/UnityAutomatedSemver repository.
-        id: semver-update
-        with:
-          updateMode: 'patch' # Change this string to any suitable string mentioned in the Inputs section of this action's readme to suit your needs.
-          projectSettingsPath: 'ProjectSettings/ProjectSettings.asset' # optional: specify the exact location of the ProjectSettings file, otherwise action will attempt to automatically find it.
+        steps:
+            # You must ALWAYS checkout your repo so that actions in the workflow can use it.
+            - name: Checkout
+              uses: actions/checkout@v4
 
-      # Validate that the number has been incremented correctly.
-      - name: Get the new semver number
-        run: echo "The new semver number for this Unity project is ${{ steps.semver-update.outputs.semver-number }}"
+            - name: Find ProjectSettings.asset & increment its bundleVersion number
+              uses: AlexStormwood/UnityAutomatedSemver@v2.0.0 # Change v1.1.1 to whatever tag is newer in the AlexStormwood/UnityAutomatedSemver repository.
+              id: semver-update
+              with:
+                  updateMode: "patch" # Change this string to any suitable string mentioned in the Inputs section of this action's readme to suit your needs.
+                  projectSettingsPath: "ProjectSettings/ProjectSettings.asset" # optional: specify the exact location of the ProjectSettings file, otherwise action will attempt to automatically find it.
 
-      # Commit & push the updated semver number back into the repo. Yes, you have to fetch & pull in your local workstation after this step is done.
-      - name: Push changed files back to repo
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Updated semver via automated action."
-          commit_options: '--no-verify --signoff'
+            # Validate that the number has been incremented correctly.
+            - name: Get the new semver value
+              run: echo "The new semver number for this Unity project is ${{ steps.semver-update.outputs.semver-string }}"
+
+            - name: Get the full semver data from the action
+              run: echo "Full semver data is ${{ steps.semver-update.outputs.semver-full-data }}"
+
+            # Commit & push the updated semver number back into the repo. Yes, you have to fetch & pull in your local workstation after this step is done.
+            - name: Push changed files back to repo
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                  commit_message: "Updated semver via automated action."
+                  commit_options: "--no-verify --signoff"
+```
+
+
+You could even use other actions to determine the semver bump type, and pass that result into your usage of this action. The example below is suitable for projects that make GitHub Releases for each Unity semver update, since the additional action used determines the semver bump type by looking at releases in the repository alongside your git commit messages (use conventional commits!).
+
+```yml
+            # Determines semver bump type to use since the last GitHub release occurred
+            - name: Determine the semver bump type
+              id: determined_bump_version
+              uses: mathieudutour/github-tag-action@v6.2
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                default_bump: patch
+                # dry_run: true # If this is set to true, no release tag is created. 
+
+
+            - name: Find ProjectSettings.asset & increment its bundleVersion number
+              uses: AlexStormwood/UnityAutomatedSemver@v2.0.0
+              id: semver-update
+              with:
+                  updateMode: ${{steps.determined_bump_version.outputs.release_type }} 
+                  projectSettingsPath: "ProjectSettings/ProjectSettings.asset" 
+
+
 ```
 
 

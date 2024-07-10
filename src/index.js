@@ -125,7 +125,7 @@ async function app(){
     if (actionInputs.backupAssetFile == "true"){
         fs.copyFileSync(
             absoluteProjectSettingsFilePath,
-            absoluteProjectSettingsFilePath.substring(0, absoluteProjectSettingsFilePath.lastIndexOf("/")) + "ProjectSettings-BACKUP.asset"
+            absoluteProjectSettingsFilePath.substring(0, absoluteProjectSettingsFilePath.lastIndexOf("/") + 1) + "ProjectSettings-BACKUP.asset"
         );
     }
 
