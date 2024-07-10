@@ -23,6 +23,7 @@
     "@bigfootds/unity-semver-updater": "^0.0.5"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.38.1",
     "jest": "^29.7.0"
   }
 }
