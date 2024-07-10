@@ -157,7 +157,7 @@ async function app(){
             buildNumber: {
                 Standalone: Number.parseInt(foundProjectSettings.toFormattedOutput("{major}{minor}{patch}")),
                 iPhone: Number.parseInt(foundProjectSettings.toFormattedOutput("{major}{minor}{patch}")),
-                tvOS: Number.parseInt(result.toFormattedOutput("{major}{minor}{patch}"))
+                tvOS: Number.parseInt(foundProjectSettings.toFormattedOutput("{major}{minor}{patch}"))
             },
             switchReleaseVersion: Number.parseInt(foundProjectSettings.toFormattedOutput("{major}{minor}{patch}")),
             switchDisplayVersion: foundProjectSettings.toFormattedOutput(actionInputs.switchDisplayVersion),
