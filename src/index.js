@@ -172,7 +172,7 @@ async function app(){
     }
     
     console.log("Going to write these properties into their relevant places in the ProjectSettings asset file now:\n" + JSON.stringify(valuesToWrite, null, 4));
-    let writeResult = await ProjectSettingsHelpers.writeToProjectSettings(targetFile, valuesToWrite);
+    let writeResult = await ProjectSettingsHelpers.writeToProjectSettings(absoluteProjectSettingsFilePath, valuesToWrite);
     console.log("Write result: " + writeResult);
 
     // 7. Set output values for the action
