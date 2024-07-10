@@ -67,12 +67,24 @@ You could even use other actions to determine the semver bump type, and pass tha
               uses: AlexStormwood/UnityAutomatedSemver@v2.0.0
               id: semver-update
               with:
-                  updateMode: ${{steps.determined_bump_version.outputs.release_type }} 
+                  updateMode: ${{steps.determined_bump_version.outputs.release_type }} # Will be major, minor, or patch, depending on commits since last GitHub release.
                   projectSettingsPath: "ProjectSettings/ProjectSettings.asset" 
-
-
 ```
 
+
+And if you just want to apply labels to an existing version, such as creating a nightly build, you can try out this:
+
+```yml
+            - name: Find ProjectSettings.asset & increment its bundleVersion number
+              uses: AlexStormwood/UnityAutomatedSemver@v2.0.0 
+              id: semver-update
+              with:
+                  updateMode: "no-bump" # Anything other than major, minor, patch or quad will actually NOT do a number bump. 
+                  releaseLabel: "rc1"
+                  buildLabel: "nightly" # Even if the updateMode is invalid, you can still add a release and/or build label to the output. 
+                  bundleVersion: "{major}.{minor}.{patch}-{releaseLabel}+{buildLabel}" #Specify a custom format for the semver to make sure your data comes through.
+                  projectSettingsPath: "ProjectSettings/ProjectSettings.asset" 
+```
 
 ### For Large Projects
 
