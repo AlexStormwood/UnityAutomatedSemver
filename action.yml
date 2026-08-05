@@ -5,9 +5,21 @@ branding:
   color: blue
 inputs:
   updateMode:  
-    description: 'Which number to increment based on semver rules.'
+    description: 'Which number to increment based on semver rules. Options: major, minor, patch, quad, or branch.'
     required: false
     default: 'patch'
+  majorBranch:
+    description: 'Comma-separated branch names that trigger a major version bump (used when updateMode is "branch").'
+    required: false
+  minorBranch:
+    description: 'Comma-separated branch names that trigger a minor version bump (used when updateMode is "branch").'
+    required: false
+  patchBranch:
+    description: 'Comma-separated branch names that trigger a patch version bump (used when updateMode is "branch").'
+    required: false
+  quadBranch:
+    description: 'Comma-separated branch names that trigger a quad version bump (used when updateMode is "branch").'
+    required: false
   projectSettingsPath: 
     description: 'Path to the ProjectSettings.asset file'
     required: false

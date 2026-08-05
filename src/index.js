@@ -18,6 +18,12 @@ let actionInputs = {
     treatBuildAsPatch: true,
     treatRevisionAsQuad: true,
 
+    // Branch-based Update Mode mappings
+    majorBranch: null,
+    minorBranch: null,
+    patchBranch: null,
+    quadBranch: null,
+
     // Value Overrides
     major: null,
     minor: null,
@@ -81,9 +87,31 @@ async function app(){
 
     console.log("Existing semver data:\n" + JSON.stringify(foundProjectSettings, null, 4));
     
-
     // 3. Update the semver numbers using the updateMode logic
-    switch (actionInputs.updateMode){
+    let effectiveUpdateMode = actionInputs.updateMode;
+    if (effectiveUpdateMode === 'branch') {
+        const currentBranch = process.env.GITHUB_REF_NAME || (process.env.GITHUB_REF || '').replace('refs/heads/', '');
+        const matchesBranch = (inputBranches) => {
+            if (!inputBranches) return false;
+            const branches = inputBranches.split(',').map(b => b.trim().toLowerCase());
+            return branches.includes(currentBranch.toLowerCase());
+        };
+        if (matchesBranch(actionInputs.majorBranch)) {
+            effectiveUpdateMode = SemverUpdateType.MAJOR;
+        } else if (matchesBranch(actionInputs.minorBranch)) {
+            effectiveUpdateMode = SemverUpdateType.MINOR;
+        } else if (matchesBranch(actionInputs.patchBranch)) {
+            effectiveUpdateMode = SemverUpdateType.PATCH;
+        } else if (matchesBranch(actionInputs.quadBranch)) {
+            effectiveUpdateMode = SemverUpdateType.QUAD;
+        } else {
+            console.warn(`No branch mapping found for "${currentBranch}". Falling back to default updateMode (patch).`);
+            effectiveUpdateMode = SemverUpdateType.PATCH;
+        }
+        console.log(`Determined updateMode "${effectiveUpdateMode}" for branch "${currentBranch}".`);
+    }
+
+    switch (effectiveUpdateMode){
         case SemverUpdateType.MAJOR:
             foundProjectSettings.bumpMajor();
             break;

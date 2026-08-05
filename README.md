@@ -156,9 +156,26 @@ Quads - the fourth number in a semver string - are not part of the semver spec, 
 
 `major -> minor -> patch -> quad`
 
-#### There is no automatic mode in this action.
+#### Branch-based Auto-Bump
 
-If you want to write a workflow that automatically updates your Unity project's semver based on your conventional commit message history, then you must combine additional steps or actions into your workflow to figure out what type of semver update must be made _before_ running this action.
+Set `updateMode` to `branch` to automatically determine the version bump type based on the current branch name. You can specify which branches trigger which bump types using the following optional inputs:
+
+* `majorBranch`: Comma-separated branch names (e.g., `release, main`)
+* `minorBranch`: Comma-separated branch names (e.g., `develop`)
+* `patchBranch`: Comma-separated branch names (e.g., `feature, hotfix`)
+* `quadBranch`: Comma-separated branch names
+
+Example:
+```yaml
+      with:
+        updateMode: "branch"
+        majorBranch: "release"
+        minorBranch: "main"
+        patchBranch: "feature"
+```
+If the current branch matches one of these lists, the corresponding semver component will be bumped. If no match is found, a warning is logged and the default update mode is used.
+
+For more complex scenarios, such as determining the bump type based on conventional commit message history since the last release, you should combine additional steps or actions into your workflow to figure out what type of semver update must be made _before_ running this action.
 
 ### treatBuildAsPatch (optional)
 
