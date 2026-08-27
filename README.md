@@ -4,6 +4,15 @@ Github Action to increment relevant project settings "version" numbers per seman
 
 Read more about semantic versioning and its spec on the website: [https://semver.org/](https://semver.org/)
 
+# New Repo Location
+
+This repo is basically defunct and you should go use my new version! 
+
+https://github.com/BigfootDS/actions-game-automated-semver
+
+It covers more engines and has some nicer functionality & examples.
+
+Enjoy!
 
 
 ## Example Usage
